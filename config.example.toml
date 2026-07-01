@@ -1,0 +1,49 @@
+# ask-llm-mcp configuration. Copy to ~/.config/ask-llm-mcp/config.toml
+# and set [llm].model to the model your endpoint serves. Environment
+# variables override these values (ASK_LLM_* wins over OPENAI_*):
+#   ASK_LLM_BASE_URL        > OPENAI_BASE_URL  > [llm].base_url
+#   ASK_LLM_MODEL           > OPENAI_MODEL     > [llm].model
+#   ASK_LLM_API_KEY         > OPENAI_API_KEY   > [llm].api_key
+#   ASK_LLM_REQUEST_TIMEOUT                    > [llm].request_timeout
+#   ASK_LLM_SYSTEM_PROMPT                      > [llm].system_prompt
+#   ASK_LLM_TEMPERATURE                        > [llm].temperature
+#   ASK_LLM_MAX_TOKENS                         > [llm].max_tokens
+#   ASK_LLM_LOG_LEVEL                          > [log].level
+#
+# To expose more than one backend to your MCP client, create several
+# config files (e.g. qwen.toml, gemma.toml) and register each server
+# with its own --config path.
+
+[llm]
+# OpenAI-compatible endpoint. Default is the LM Studio local server.
+# The server appends /chat/completions to this base URL.
+base_url = "http://localhost:1234/v1"
+
+# Required. The model name your endpoint serves (in LM Studio, the name
+# of the currently loaded model).
+model = ""
+
+# Optional. Sent as `Authorization: Bearer <api_key>` only when set.
+# Local LM Studio does not require it; leave empty. For a cloud
+# compatible endpoint, prefer the ASK_LLM_API_KEY / OPENAI_API_KEY env
+# var over committing a key here.
+api_key = ""
+
+# Optional. Per-request timeout in seconds. Default: 180 (long, for
+# heavy local models).
+request_timeout = 180
+
+# Optional. Prepended as a system message when non-empty.
+system_prompt = ""
+
+# Optional. Sampling temperature. Omitted from the request when unset,
+# deferring to the server/model default. Uncomment to set.
+# temperature = 0.7
+
+# Optional. Max tokens to generate. Omitted when unset. Uncomment to set.
+# max_tokens = 2048
+
+[log]
+# Optional. Log level: debug | info | warn | error. Default: info.
+# Logs go to stderr only; stdout is reserved for the MCP transport.
+level = "info"
