@@ -14,11 +14,6 @@
 シェルアクセスのない MCP クライアント（Claude Code / Claude Desktop 等）
 から、別モデルへ相談するためのチャネルとして使えます。
 
-## ステータス
-
-プレリリース。`_wip/` 配下で scaffold 済み。設計は
-[`docs/ja/ask-llm-mcp-rfp.ja.md`](docs/ja/ask-llm-mcp-rfp.ja.md) を参照。
-
 ## クイックスタート
 
 ```sh

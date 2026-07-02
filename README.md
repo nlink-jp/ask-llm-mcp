@@ -16,11 +16,6 @@ Intended as a second-opinion channel for AI coding agents (Claude Code,
 Claude Desktop, …) — especially useful in MCP clients without shell
 access, where CLI tools cannot be invoked directly.
 
-## Status
-
-Pre-release. Scaffolded under `_wip/`. See
-[`docs/en/ask-llm-mcp-rfp.md`](docs/en/ask-llm-mcp-rfp.md) for the design RFP.
-
 ## Quick start
 
 ```sh
