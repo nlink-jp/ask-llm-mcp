@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format is
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-07-12
+
+### Removed
+
+- **darwin/amd64 (Intel) pre-built binary.** macOS releases now ship
+  **arm64 only**, per the org-wide policy (darwin is Apple-Silicon only; no
+  universal binaries). Intel Mac users can build from source.
+
+### Changed
+
+- **Linux release archives are now `.tar.gz`** (darwin/windows remain `.zip`),
+  per `nlink-jp/.github` CONVENTIONS.md §Release Archive Standard.
+- **`LICENSE` is now bundled** in every release archive alongside `README.md`.
+- **darwin code-signature identifier** is now the canonical `ask-llm-mcp`.
+
+### Fixed
+
+- Notarization surfaces the real `notarytool` error (e.g. an expired Apple
+  Developer agreement / HTTP 403) instead of a misleading "profile not found".
+
+No change to the binary's behaviour — a packaging / build-config release.
+
 ## [0.1.0] - 2026-07-02
 
 ### Added
