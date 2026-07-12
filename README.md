@@ -110,7 +110,7 @@ make test       # go test ./...
 make test-e2e   # build + spawn the binary and drive it over stdio
                 # against an in-process OpenAI-compatible dummy server
                 # (hermetic — no network / credentials / LM Studio needed)
-make build-all  # cross-compile 5 platforms; darwin builds get codesigned
+make build-all  # cross-compile 4 platforms (darwin arm64 only); darwin gets codesigned
 make package    # build-all + zip with version suffix + notarize darwin
 ```
 

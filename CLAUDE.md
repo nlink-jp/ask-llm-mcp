@@ -27,7 +27,7 @@ backend unified on OpenAI-compatible, no genai / GCP dependency).
 make build      # → dist/ask-llm-mcp (auto-codesigns on darwin if a
                 # Developer ID Application identity is in the keychain)
 make test       # go test ./...
-make build-all  # cross-compile 5 platforms; darwin builds get codesigned
+make build-all  # cross-compile 4 platforms (darwin arm64 only); darwin gets codesigned
 make test-e2e   # build + spawn binary + drive over stdio against an
                 # in-process OpenAI-compatible dummy server (hermetic:
                 # no network / credentials / LM Studio required)
