@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format is
 based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `TestEveryToolSchemaIsClosed` — the arch test organization ADR-021 §10
+  requires: every registered tool's input schema must set
+  `additionalProperties: false`. `ask_llm` already set it, so no schema
+  changed; the test is what keeps it set and what covers the next tool.
+- `tools.Registry` — one list pairing each tool descriptor with its handler.
+  `cmd` now registers from it and the arch test walks it, so the two cannot
+  disagree about which tools exist, and a tool added there needs no change in
+  either caller.
+
 ## [0.2.0] - 2026-07-12
 
 ### Removed

@@ -53,6 +53,25 @@ func AskLLMTool() mcpserver.Tool {
 	}
 }
 
+// Registration is one tool: its descriptor and the handler behind it.
+type Registration struct {
+	Tool    mcpserver.Tool
+	Handler mcpserver.ToolHandler
+}
+
+// Registry is every tool this server exposes. cmd registers from this list and
+// the schema arch test walks it, so neither can be looking at a different set
+// of tools than the other — a tool added here is registered and asserted over
+// without touching either caller.
+//
+// asker may be nil when only the descriptors are wanted (the arch test does
+// that); handlers are not invoked by tools/list.
+func Registry(asker Asker) []Registration {
+	return []Registration{
+		{Tool: AskLLMTool(), Handler: AskLLMHandler(asker)},
+	}
+}
+
 // askLLMArgs is the JSON shape of the tool arguments. Decoded strictly
 // (unknown fields rejected) so a misspelled key surfaces as an
 // invalid_arguments error rather than being silently ignored

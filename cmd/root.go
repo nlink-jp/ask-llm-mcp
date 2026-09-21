@@ -117,7 +117,9 @@ func run(cmd *cobra.Command, args []string) error {
 
 	tr := transport.NewStdioTransport(os.Stdin, os.Stdout)
 	srv := mcpserver.New("ask-llm-mcp", serverVersion, tr, logger)
-	srv.RegisterTool(tools.AskLLMTool(), tools.AskLLMHandler(client))
+	for _, r := range tools.Registry(client) {
+		srv.RegisterTool(r.Tool, r.Handler)
+	}
 
 	if err := srv.Serve(ctx); err != nil {
 		if errors.Is(err, context.Canceled) {

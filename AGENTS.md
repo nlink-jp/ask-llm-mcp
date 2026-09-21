@@ -66,6 +66,21 @@ are pointers (nil = omitted from the request).
   in-flight calls (MCP 2024-11-05 has no protocol-level cancel).
 - **e2e retry cost**: the retry backoff is 2s–30s in production; tests set
   `Client.backoffBase/backoffMax` to 1ms to stay fast.
+- **Every tool schema is closed** (`additionalProperties: false`, organization
+  ADR-021 §10), and both halves of the contract are real: the schema stops a
+  mistyped argument at a validating client, the handler's
+  `DisallowUnknownFields` stops it at the server. `ask_llm` already set the
+  key; `TestEveryToolSchemaIsClosed` is what keeps it set and what covers the
+  next tool.
+- **`tools.Registry` is the single registration list.** `cmd` registers from
+  it and the arch test walks it, so a tool added there is registered and
+  asserted over without touching either caller. Do not go back to naming a
+  tool constructor directly in `cmd` — a second list is a list that drifts,
+  and the arch test would then be asserting over a set the server does not
+  serve.
+- **No `make check` / `make lint` target** — only `make test`. Nothing in this
+  repo gates formatting or vet, so drift accumulates unnoticed. Run
+  `go vet ./...` and `gofmt -l .` by hand before a release.
 
 ## Design references
 
