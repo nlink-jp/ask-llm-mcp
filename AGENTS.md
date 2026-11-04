@@ -11,8 +11,8 @@ shell access.
 
 Generalized from `ask-gemini-mcp`: the MCP skeleton is shared; the
 backend is unified on the OpenAI-compatible protocol, so there is **no
-genai / Google Cloud dependency**. Dependencies: `cobra`, `BurntSushi/toml`,
-`nlink-jp/nlk` (backoff).
+genai / Google Cloud dependency**. Dependencies: `cobra`, `nlink-jp/toml`
+(strict: an unknown key is an error), `nlink-jp/nlk` (backoff).
 
 ## Build & test
 

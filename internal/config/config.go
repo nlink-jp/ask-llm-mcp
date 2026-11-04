@@ -19,12 +19,13 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
 
-	"github.com/BurntSushi/toml"
+	"github.com/nlink-jp/toml"
 )
 
 // Built-in defaults applied when neither the config file nor an env var
@@ -84,11 +85,13 @@ func Load(path string) (*Config, error) {
 	}
 	if path != "" {
 		if _, err := os.Stat(path); err == nil {
-			meta, err := toml.DecodeFile(path, cfg)
-			if err != nil {
+			_, err := toml.DecodeFile(path, cfg)
+			var unknown *toml.UnknownKeysError
+			if err != nil && !errors.As(err, &unknown) {
 				return nil, fmt.Errorf("parse config %s: %w", path, err)
 			}
-			if undecoded := meta.Undecoded(); len(undecoded) > 0 {
+			if unknown != nil {
+				undecoded := unknown.Keys
 				return nil, fmt.Errorf("parse config %s: unknown fields: %v", path, undecoded)
 			}
 		}

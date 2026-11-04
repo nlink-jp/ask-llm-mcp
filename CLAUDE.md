@@ -62,7 +62,7 @@ Settings load order: built-in defaults → TOML file → env vars.
 - Go stdlib `net/http` + `encoding/json` — OpenAI-compatible HTTP client
 - `github.com/nlink-jp/nlk/backoff` — retry backoff
 - `github.com/spf13/cobra` — CLI framework
-- `github.com/BurntSushi/toml` — config file parsing
+- `github.com/nlink-jp/toml` — config file parsing (strict: an unknown key is an error)
 
 ## Architecture
 
