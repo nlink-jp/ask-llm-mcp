@@ -23,6 +23,7 @@ make test-e2e   # hermetic e2e: spawn binary + drive over stdio against
                 # an in-process OpenAI-compatible dummy server
 make build-all  # 5 platforms; darwin codesigned
 make package    # build-all + zip + notarize darwin (NOTARY_PROFILE)
+make vuln            # govulncheck over the build; `make package` runs it first and stops on a finding
 make verify-release  # gate: notarized, fresh, runs at this version, clean linux archives (run before upload)
 ```
 
